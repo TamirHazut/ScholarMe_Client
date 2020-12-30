@@ -13,4 +13,11 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+    <style name="Widget.Custom.TextInputLayout.OutlinedBox.ExposedDropdownMenu" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+        <item name="boxStrokeWidth">1dp</item>
+        <item name="boxCornerRadiusTopStart">25sp</item>
+        <item name="boxCornerRadiusTopEnd">25sp</item>
+        <item name="boxCornerRadiusBottomStart">25sp</item>
+        <item name="boxCornerRadiusBottomEnd">25sp</item>
+    </style>
 </resources>
