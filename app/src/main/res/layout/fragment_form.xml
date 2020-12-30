@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Form_Fragment"
+    android:gravity="center">
+    <ImageView
+        android:id="@+id/form1_fragment_background_IMG"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop">
+    </ImageView>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp"
+        android:layout_marginLeft="50dp"
+        android:gravity="center"
+        android:scrollbarTrackVertical="@color/white"
+        >
+
+        <TextView
+            android:id="@+id/form1_fragment_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/webfont"
+            android:text="שלב 1- פרטים אישיים"
+            android:textDirection="rtl"
+            android:textSize="22sp"
+
+            />
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="64dp"
+            android:layout_marginTop="64dp"
+            android:layout_marginEnd="64dp"
+            android:layout_marginBottom="64dp"
+            android:background="#fff">
+
+        </androidx.cardview.widget.CardView>
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Theme.Design"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <AutoCompleteTextView
+                android:id="@+id/form1_fragment_DDM"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:inputType="none" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/form1_fragment_current_year"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/webfont"
+            android:text="אני סטודנט שנה:"
+            android:layout_marginTop="10dp"
+            android:textDirection="rtl"
+            android:textSize="22sp"
+            android:background="#97FFFFFF"
+
+            />
+        <RadioGroup
+            android:id="@+id/form1_fragment_year_radio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:orientation="horizontal"
+            android:theme="@style/Animation.Design.BottomSheetDialog"
+            android:layoutDirection="rtl"
+            android:outlineSpotShadowColor="@color/cardview_shadow_end_color">
+
+            <RadioButton
+                android:id="@+id/radioButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1" />
+
+            <RadioButton
+                android:id="@+id/radioButton2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2" />
+
+            <RadioButton
+                android:id="@+id/radioButton3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="3" />
+
+            <RadioButton
+                android:id="@+id/radioButton4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="4" />
+        </RadioGroup>
+
+        <DatePicker
+            android:id="@+id/form1_fragment_graduation_cal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:calendarViewShown="false"
+            android:datePickerMode="spinner"
+            android:calendarTextColor="@color/white"/>
+
+        <RadioGroup
+            android:id="@+id/form1_fragment_gander_radio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/form1_fragment_female"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/webfont"
+                android:text="זכר" />
+
+            <RadioButton
+                android:id="@+id/form1_fragment_male"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/webfont"
+                android:text="נקבה" />
+        </RadioGroup>
+
+        <Button
+            android:id="@+id/form1_fragment_continue_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/webfont"
+            android:gravity="center"
+            android:text="המשך"
+            android:textSize="22sp" />
+
+    </LinearLayout>
+
+
+</RelativeLayout>

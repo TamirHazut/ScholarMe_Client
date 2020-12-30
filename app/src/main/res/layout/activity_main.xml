@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <RelativeLayout
+        android:id="@+id/main_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ImageView
+            android:id="@+id/main_background_IMG"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop">
+        </ImageView>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/candy"
+            android:textColor="#C4E2E6"
+            android:text="ScholarMe"
+            android:textSize="32dp"
+            android:gravity="bottom"
+            android:textStyle="bold"
+            android:layout_marginTop="290dp"
+            android:layout_marginLeft="10dp"
+            android:shadowDx="10"
+            android:shadowDy="10"
+            android:shadowRadius="10"
+            android:shadowColor="@color/black"
+            >
+
+
+        </TextView>
+
+    </RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

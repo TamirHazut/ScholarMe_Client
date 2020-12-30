@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<font-family xmlns:android="http://schemas.android.com/apk/res/android">
+<font
+
+    android:fontStyle="normal"
+    android:fontWeight="400"
+    android:font="@font/lapica" >
+</font>
+    <font
+
+        android:fontStyle="normal"
+        android:fontWeight="400"
+        android:font="@font/candy" >
+    </font>
+    <font
+
+        android:fontStyle="normal"
+        android:fontWeight="400"
+        android:font="@font/magic" >
+    </font>
+    <font
+
+        android:fontStyle="normal"
+        android:fontWeight="400"
+        android:font="@font/font1" >
+    </font>
+
+    <font
+
+        android:fontStyle="normal"
+        android:fontWeight="400"
+        android:font="@font/webfont" >
+    </font>
+</font-family>
