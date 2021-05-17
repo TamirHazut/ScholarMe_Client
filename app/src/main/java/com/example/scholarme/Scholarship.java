@@ -10,7 +10,7 @@ public class Scholarship {
     private String name;
     private Date create_time;
     private String description;
-    private List<String> links ;
+    private List<String> links;
     private Set<String> tags;
     private double matchingPercentage;
 

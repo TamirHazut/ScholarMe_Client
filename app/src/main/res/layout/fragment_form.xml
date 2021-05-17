@@ -86,7 +86,7 @@
                 android:id="@+id/form_fragment_DDM_study_year"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:hint="בחר מוסד לימודים"
+                android:hint="שנת לימוד"
                 android:layout_marginTop="10dp"
                 android:inputType="none" />
 

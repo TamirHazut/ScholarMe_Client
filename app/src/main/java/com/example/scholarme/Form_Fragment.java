@@ -98,12 +98,12 @@ public class Form_Fragment extends Fragment_Base {
                 if(isChecked){
                     form_fragment_SWT.setChecked(true);
                     Log.d("DDM", "Switch: " + "checked");
-                    search_scholarship.setContribution(Contribution.YES);
+                    search_scholarship.setContribution(true);
                 }
                 else {
                     form_fragment_SWT.setChecked(false);
                     Log.d("DDM", "Switch: " + "Not checked");
-                    search_scholarship.setContribution(Contribution.NO);
+                    search_scholarship.setContribution(false);
                 }
             }
         });

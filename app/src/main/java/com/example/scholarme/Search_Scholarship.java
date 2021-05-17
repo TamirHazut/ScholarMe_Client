@@ -9,10 +9,10 @@ public class Search_Scholarship {
     private String study_year;
     private String graduation_year;
     private Gender gender;
-   private Contribution contribution;
+    private boolean contribution;
     public Search_Scholarship(){};
 
-   public Search_Scholarship(String institute, String degree, String location, String sectors, String study_year, String graduation_year, Gender gender, Contribution contribution){
+   public Search_Scholarship(String institute, String degree, String location, String sectors, String study_year, String graduation_year, Gender gender, boolean contribution){
        this.institute = institute;
        this.degree = degree;
        this.location = location;
@@ -80,11 +80,11 @@ public class Search_Scholarship {
         this.gender = gender;
     }
 
-    public Contribution getContribution() {
+    public boolean isContribution() {
         return contribution;
     }
 
-    public void setContribution(Contribution contribution) {
+    public void setContribution(boolean contribution) {
         this.contribution = contribution;
     }
 

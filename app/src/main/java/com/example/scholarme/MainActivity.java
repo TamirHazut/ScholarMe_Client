@@ -1,28 +1,31 @@
 package com.example.scholarme;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.MenuItem;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import java.security.cert.CertificateException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 
-import kotlin.NoWhenBranchMatchedException;
+import javax.net.ssl.HostnameVerifier;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLSession;
+import javax.net.ssl.SSLSocketFactory;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509TrustManager;
+
+import okhttp3.OkHttpClient;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -80,6 +83,7 @@ public class MainActivity extends AppCompatActivity implements Callback<List<Sch
         this.gson = new GsonBuilder().setLenient().create();
         this.retrofit = new Retrofit.Builder()
                 .baseUrl(Constants.BASE_URL)
+                .client(getUnsafeOkHttpClient())
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
         this.scholarshipsAPI = retrofit.create(ScholarshipsAPI.class);
@@ -115,8 +119,8 @@ public class MainActivity extends AppCompatActivity implements Callback<List<Sch
                         case 1:
                             if(search_scholarship != null) {
 // String institute, String degree, String location, String sectors, String study_year, String graduation_year, Gender gender, Contribution contribution
-                                Search_Scholarship search_scholarship =new Search_Scholarship("1", "1", "1", "1", "1", "1", Gender.FEMALE, Contribution.YES);
-                                Log.d("pttt", gson.toJson(search_scholarship));
+                                //Search_Scholarship search_scholarship =new Search_Scholarship("1", "1", "1", "1", "1", "1", Gender.FEMALE, true);
+                                //Log.d("pttt", gson.toJson(search_scholarship));
                                 getScholarships(search_scholarship);
                             }
                             else {
@@ -186,15 +190,15 @@ public class MainActivity extends AppCompatActivity implements Callback<List<Sch
             results_fragment = new Results_Fragment();
             args.putString(Constants.SCHOLARSHIPS, gson.toJson(scholarships));
             results_fragment.setArguments(args);
+            loadFragment(results_fragment);
         } else {
-            Log.e("pttt", response.errorBody().toString());
+            Log.e("pttt", "Response " + response.code() + " - " + response.errorBody().toString());
         }
     }
 
     @Override
     public void onFailure(Call<List<Scholarship>> call, Throwable t) {
-        Log.e("pttt", t.getMessage());
-
+        Log.e("pttt", "Failed: " + t.getMessage());
     }
 
     public void getScholarships(Search_Scholarship scholarship) {
@@ -209,17 +213,60 @@ public class MainActivity extends AppCompatActivity implements Callback<List<Sch
 //        loadFragment(results_fragment);
     }
 
-    public List<Scholarship> getMock() {
-        List<Scholarship> scholarships = new ArrayList<>();
-        // String id, String name, Date create_time, String description, List<String> links, Set<String> tags, double matchingPercentage
-        scholarships.add(new Scholarship("1", "1", new Date(), "1", new ArrayList<>(), new HashSet<>(), 100));
-        scholarships.add(new Scholarship("2", "2", new Date(), "2", new ArrayList<>(), new HashSet<>(), 90));
-        scholarships.add(new Scholarship("3", "3", new Date(), "3", new ArrayList<>(), new HashSet<>(), 80));
-        scholarships.add(new Scholarship("4", "4", new Date(), "4", new ArrayList<>(), new HashSet<>(), 70));
-        scholarships.add(new Scholarship("5", "5", new Date(), "5", new ArrayList<>(), new HashSet<>(), 60));
-        scholarships.add(new Scholarship("6", "6", new Date(), "6", new ArrayList<>(), new HashSet<>(), 50));
-        scholarships.add(new Scholarship("7", "7", new Date(), "7", new ArrayList<>(), new HashSet<>(), 40));
-        scholarships.add(new Scholarship("8", "8", new Date(), "8", new ArrayList<>(), new HashSet<>(), 100));
-        return scholarships;
+//    public List<Scholarship> getMock() {
+//        List<Scholarship> scholarships = new ArrayList<>();
+//        // String id, String name, Date create_time, String description, List<String> links, Set<String> tags, double matchingPercentage
+//        scholarships.add(new Scholarship("1", "1", new Date(), "1", new ArrayList<>(), new HashSet<>(), 100));
+//        scholarships.add(new Scholarship("2", "2", new Date(), "2", new ArrayList<>(), new HashSet<>(), 90));
+//        scholarships.add(new Scholarship("3", "3", new Date(), "3", new ArrayList<>(), new HashSet<>(), 80));
+//        scholarships.add(new Scholarship("4", "4", new Date(), "4", new ArrayList<>(), new HashSet<>(), 70));
+//        scholarships.add(new Scholarship("5", "5", new Date(), "5", new ArrayList<>(), new HashSet<>(), 60));
+//        scholarships.add(new Scholarship("6", "6", new Date(), "6", new ArrayList<>(), new HashSet<>(), 50));
+//        scholarships.add(new Scholarship("7", "7", new Date(), "7", new ArrayList<>(), new HashSet<>(), 40));
+//        scholarships.add(new Scholarship("8", "8", new Date(), "8", new ArrayList<>(), new HashSet<>(), 100));
+//        return scholarships;
+//    }
+
+    private OkHttpClient getUnsafeOkHttpClient() {
+        try {
+            // Create a trust manager that does not validate certificate chains
+            final TrustManager[] trustAllCerts = new TrustManager[] {
+                    new X509TrustManager() {
+                        @Override
+                        public void checkClientTrusted(java.security.cert.X509Certificate[] chain, String authType) throws CertificateException {
+                        }
+
+                        @Override
+                        public void checkServerTrusted(java.security.cert.X509Certificate[] chain, String authType) throws CertificateException {
+                        }
+
+                        @Override
+                        public java.security.cert.X509Certificate[] getAcceptedIssuers() {
+                            return new java.security.cert.X509Certificate[]{};
+                        }
+                    }
+            };
+
+            // Install the all-trusting trust manager
+            final SSLContext sslContext = SSLContext.getInstance("SSL");
+            sslContext.init(null, trustAllCerts, new java.security.SecureRandom());
+
+            // Create an ssl socket factory with our all-trusting manager
+            final SSLSocketFactory sslSocketFactory = sslContext.getSocketFactory();
+
+            OkHttpClient.Builder builder = new OkHttpClient.Builder();
+            builder.sslSocketFactory(sslSocketFactory, (X509TrustManager)trustAllCerts[0]);
+            builder.hostnameVerifier(new HostnameVerifier() {
+                @Override
+                public boolean verify(String hostname, SSLSession session) {
+                    return true;
+                }
+            });
+
+            OkHttpClient okHttpClient = builder.build();
+            return okHttpClient;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }
