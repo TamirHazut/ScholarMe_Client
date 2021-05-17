@@ -3,157 +3,151 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:verticalScrollbarPosition="right"
     tools:context=".Form_Fragment"
-    android:gravity="center">
-    <ImageView
-        android:id="@+id/form1_fragment_background_IMG"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scaleType="centerCrop">
-    </ImageView>
+    >
 
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="24dp"
-        android:layout_marginLeft="50dp"
+        android:id="@+id/main_frament"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:gravity="center"
-        android:scrollbarTrackVertical="@color/white"
+        android:orientation="vertical"
+        android:padding="40dp"
         >
 
-        <TextView
-            android:id="@+id/form1_fragment_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/webfont"
-            android:text="שלב 1- פרטים אישיים"
-            android:textDirection="rtl"
-            android:textSize="22sp"
-
-            />
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="64dp"
-            android:layout_marginTop="64dp"
-            android:layout_marginEnd="64dp"
-            android:layout_marginBottom="64dp"
-            android:background="#fff">
-
-        </androidx.cardview.widget.CardView>
         <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.Custom.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            style="@style/Widget.Custom.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+            android:layout_height="wrap_content">
 
             <AutoCompleteTextView
-                android:id="@+id/form1_fragment_DDM_institute"
+                android:id="@+id/form_fragment_DDM_cities"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:inputType="none" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            style="@style/Widget.Custom.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
-
-            <AutoCompleteTextView
-                android:id="@+id/form1_fragment_DDM_degree"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:hint="עיר מגורים"
                 android:inputType="none" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
-        <TextView
-            android:id="@+id/form1_fragment_current_year"
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.Custom.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center">
+
+            <AutoCompleteTextView
+                android:id="@+id/form_fragment_DDM_sectors"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="אני ממוצא"
+                android:layout_marginTop="10dp"
+                android:inputType="none" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.Custom.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <AutoCompleteTextView
+                android:id="@+id/form_fragment_DDM_degree"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+                android:hint="בחר תואר"
+                android:inputType="none" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.Custom.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center">
+
+            <AutoCompleteTextView
+                android:id="@+id/form_fragment_DDM_institute"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="בחר מוסד לימודים"
+                android:layout_marginTop="10dp"
+                android:inputType="none" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.Custom.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center">
+
+            <AutoCompleteTextView
+                android:id="@+id/form_fragment_DDM_study_year"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="בחר מוסד לימודים"
+                android:layout_marginTop="10dp"
+                android:inputType="none" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <EditText
+            android:id="@+id/form_fragment_graduation_EDT"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/webfont"
-            android:text="אני סטודנט שנה:"
             android:layout_marginTop="10dp"
+            android:ems="9"
             android:textDirection="rtl"
-            android:textSize="22sp"
-            android:background="#97FFFFFF"
+            android:layout_gravity="right"
+            android:fontFamily="@font/webfont"
+            android:hint="תאריך סיום לימודים" />
 
-            />
-        <RadioGroup
-            android:id="@+id/form1_fragment_year_radio"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:orientation="horizontal"
-            android:theme="@style/Animation.Design.BottomSheetDialog"
-            android:layoutDirection="rtl"
-            android:outlineSpotShadowColor="@color/cardview_shadow_end_color">
 
-            <RadioButton
-                android:id="@+id/radioButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="1" />
-
-            <RadioButton
-                android:id="@+id/radioButton2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="2" />
-
-            <RadioButton
-                android:id="@+id/radioButton3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="3" />
-
-            <RadioButton
-                android:id="@+id/radioButton4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="4" />
-        </RadioGroup>
-
-        <DatePicker
-            android:id="@+id/form1_fragment_graduation_cal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="20dp"
-            android:calendarViewShown="false"
-            android:datePickerMode="spinner"
-            android:calendarTextColor="@color/white"/>
 
         <RadioGroup
-            android:id="@+id/form1_fragment_gander_radio"
+            android:id="@+id/form_fragment_gander_RGP"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="right"
             android:orientation="horizontal">
 
             <RadioButton
-                android:id="@+id/form1_fragment_female"
+                android:id="@+id/form_fragment_male"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/webfont"
                 android:text="זכר" />
 
             <RadioButton
-                android:id="@+id/form1_fragment_male"
+                android:id="@+id/form_fragment_female"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/webfont"
                 android:text="נקבה" />
         </RadioGroup>
 
-        <Button
-            android:id="@+id/form1_fragment_continue_button"
+
+        <Switch
+            android:id="@+id/form_fragment_SWT"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:bufferType="normal"
+            android:layoutDirection="rtl"
+            android:layout_gravity="right"
+            android:text="מוכן לתרום לקהילה "
             android:fontFamily="@font/webfont"
-            android:gravity="center"
-            android:text="המשך"
-            android:textSize="22sp" />
+            android:textDirection="rtl"></Switch>
+
+
+            <ImageButton
+                android:id="@+id/continue_BTN"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:background="@drawable/ic_arrow" />
 
     </LinearLayout>
 

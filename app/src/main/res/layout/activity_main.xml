@@ -4,37 +4,32 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+   >
 
-    <RelativeLayout
-        android:id="@+id/main_layout"
+
+    <com.etebarian.meowbottomnavigation.MeowBottomNavigation
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <ImageView
-            android:id="@+id/main_background_IMG"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="centerCrop">
-        </ImageView>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/candy"
-            android:textColor="#C4E2E6"
-            android:text="ScholarMe"
-            android:textSize="32dp"
-            android:gravity="bottom"
-            android:textStyle="bold"
-            android:layout_marginTop="290dp"
-            android:layout_marginLeft="10dp"
-            android:shadowDx="10"
-            android:shadowDy="10"
-            android:shadowRadius="10"
-            android:shadowColor="@color/black"
-            >
+        android:layout_height="wrap_content"
+        android:id="@+id/main_BAR_bottomNav"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:mbn_circleColor="@color/white"
+        app:mbn_selectedIconColor="#155B77"
+        app:mbn_countTextColor="@color/white"
+        app:mbn_countBackgroundColor="#ff6f00"
+        app:mbn_defaultIconColor="@color/white"
+        app:mbn_backgroundBottomColor="#155B77"
+
+        />
 
 
-        </TextView>
+    <FrameLayout
+        android:id="@+id/main_LAY_frame"
+        android:layout_width="match_parent"
+        android:layout_height="0sp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/main_BAR_bottomNav"
+       >
 
-    </RelativeLayout>
+    </FrameLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

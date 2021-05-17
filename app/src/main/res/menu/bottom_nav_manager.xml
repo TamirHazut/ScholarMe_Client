@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/cart"
+        android:icon="@drawable/cart_icon"
+        android:title="הזמנות"
+        />
+    <item android:id="@+id/products"
+        android:icon="@drawable/add_icon"
+        android:title="מוצרים"
+        />
+    <item android:id="@+id/recipes"
+        android:icon="@drawable/recipe_icon"
+        android:title="מתכונים"
+        />
+
+</menu>

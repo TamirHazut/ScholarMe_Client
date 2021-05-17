@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity_Splash">
+
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:background="@color/white" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha="0.0"
+        android:background="#000000" />
+
+    <ImageView
+        android:id="@+id/main_background_IMG"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="70dp"
+        android:layout_marginRight="10dp"
+        android:alpha="0.7"
+        android:src="@drawable/hat" />
+
+
+    <TextView
+        android:id="@+id/splash_LBL_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="380dp"
+        android:layout_centerHorizontal="true"
+        android:text="ScholarMe"
+        android:fontFamily="@font/magic"
+        android:textColor="#155B77"
+        android:textSize="60dp" />
+
+
+</RelativeLayout>
