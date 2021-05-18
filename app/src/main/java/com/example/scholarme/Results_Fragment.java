@@ -57,8 +57,8 @@ public class Results_Fragment extends Fragment_Base {
     private void initImageBitmaps(){
         List<ScholarshipAdapterItem> items = new ArrayList<>();
         for (Scholarship scholarship: scholarships) {
-            String image_url = "p" + (int)scholarship.getMatchingPercentage();
-            int image_url_id = this.getResources().getIdentifier(image_url, "drawable", this.getActivity().getPackageName());
+            String image_url = "p" + (int)(Math.ceil(scholarship.getMatchingPercentage()/10)*10);
+            int image_url_id = this.getActivity().getApplicationContext().getResources().getIdentifier(image_url, "drawable", this.getActivity().getApplicationContext().getPackageName());
             items.add(new ScholarshipAdapterItem(image_url_id, scholarship.getName(), scholarship.getDescription(), scholarship.getMatchingPercentage()));
         }
         /*Log.d(TAG, "initImageBitmaps: preparing bitmaps.");
