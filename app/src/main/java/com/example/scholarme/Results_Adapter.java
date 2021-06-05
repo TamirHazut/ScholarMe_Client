@@ -9,11 +9,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -24,16 +21,9 @@ public class Results_Adapter extends RecyclerView.Adapter<Results_Adapter.ViewHo
 
     private static final String TAG = "StaggeredRecyclerViewAd";
 
-//    private ArrayList<String> mNames = new ArrayList<>();
-//    private ArrayList<Integer> mImageUrls = new ArrayList<>();
     private List<ScholarshipAdapterItem> items;
     private Context mContext;
 
-//    public Results_Adapter(Context context, ArrayList<String> names, ArrayList<Integer> imageUrls) {
-//        mNames = names;
-//        mImageUrls = imageUrls;
-//        mContext = context;
-//    }
 
     public Results_Adapter(Context context, List<ScholarshipAdapterItem> items) {
         this.mContext = context;
@@ -54,16 +44,11 @@ public class Results_Adapter extends RecyclerView.Adapter<Results_Adapter.ViewHo
                 .placeholder(R.drawable.ic_launcher_background);
 
 
+        holder.result_item_name.setText(items.get(position).getName());
+        holder.result_item_percents.setText(""+items.get(position).getMatchingPercentage());
+        holder.result_item_background.setImageResource(items.get(position).getImage());
 
-//        Glide.with(mContext)
-//                .load(mImageUrls.get(position))
-//                .apply(requestOptions)
-//                .into(holder.image);
-
-        holder.name.setText(items.get(position).getName());
-        holder.image.setImageResource(items.get(position).getImage());
-
-        holder.image.setOnClickListener(new View.OnClickListener() {
+        holder.result_item_background.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Log.d(TAG, "onClick: clicked on: " +items.get(position).getName());
@@ -80,13 +65,16 @@ public class Results_Adapter extends RecyclerView.Adapter<Results_Adapter.ViewHo
 
     public class ViewHolder extends RecyclerView.ViewHolder{
 
-        ImageView image;
-        TextView name;
+        ImageView result_item_background;
+        TextView result_item_name;
+        TextView result_item_percents;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            this.image = itemView.findViewById(R.id.imageview_widget);
-            this.name = itemView.findViewById(R.id.name_widget);
+            this.result_item_background = itemView.findViewById(R.id.result_item_background);
+            this.result_item_percents = itemView.findViewById(R.id.result_item_percents);
+            this.result_item_name = itemView.findViewById(R.id.result_item_name);
+
         }
     }
 }
