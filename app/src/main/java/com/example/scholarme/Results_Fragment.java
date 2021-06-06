@@ -51,7 +51,6 @@ public class Results_Fragment extends Fragment_Base {
     private void findviews(View view) {
 
         this.recyclerView = view.findViewById(R.id.recyclerView);
-
     }
 
     private void initImageBitmaps(){

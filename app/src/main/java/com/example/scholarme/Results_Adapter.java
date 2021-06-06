@@ -45,10 +45,10 @@ public class Results_Adapter extends RecyclerView.Adapter<Results_Adapter.ViewHo
 
 
         holder.result_item_name.setText(items.get(position).getName());
-        holder.result_item_percents.setText(""+items.get(position).getMatchingPercentage());
+        holder.result_item_percents.setText(String.valueOf(Double.valueOf(items.get(position).getMatchingPercentage()).intValue()));
         holder.result_item_background.setImageResource(items.get(position).getImage());
 
-        holder.result_item_background.setOnClickListener(new View.OnClickListener() {
+        holder.result_item_percents.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Log.d(TAG, "onClick: clicked on: " +items.get(position).getName());
@@ -57,6 +57,8 @@ public class Results_Adapter extends RecyclerView.Adapter<Results_Adapter.ViewHo
         });
 
     }
+
+
 
     @Override
     public int getItemCount() {
@@ -76,5 +78,6 @@ public class Results_Adapter extends RecyclerView.Adapter<Results_Adapter.ViewHo
             this.result_item_name = itemView.findViewById(R.id.result_item_name);
 
         }
+
     }
 }

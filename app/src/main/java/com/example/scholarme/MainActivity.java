@@ -43,7 +43,8 @@ public class MainActivity extends AppCompatActivity implements Callback<List<Sch
     private Retrofit retrofit;
     private ScholarshipsAPI scholarshipsAPI;
     private Search_Scholarship search_scholarship;
-     MeowBottomNavigation bottomNav;
+    private MeowBottomNavigation bottomNav;
+    private List<Scholarship> scholarshipsResults;
 
   //  private BottomNavigationView bottomNav;
 
@@ -79,7 +80,7 @@ public class MainActivity extends AppCompatActivity implements Callback<List<Sch
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        this.scholarshipsResults = new ArrayList<>();
         this.gson = new GsonBuilder().setLenient().create();
         this.retrofit = new Retrofit.Builder()
                 .baseUrl(Constants.BASE_URL)
@@ -117,11 +118,11 @@ public class MainActivity extends AppCompatActivity implements Callback<List<Sch
             public void onShowItem(MeowBottomNavigation.Model item) {
                 switch (item.getId()) {
                         case 1:
-                            if(search_scholarship != null) {
+                            if(search_scholarship != null && !bottomNav.isShowing(1)) {
 // String institute, String degree, String location, String sectors, String study_year, String graduation_year, Gender gender, Contribution contribution
                                 //Search_Scholarship search_scholarship =new Search_Scholarship("1", "1", "1", "1", "1", "1", Gender.FEMALE, true);
                                 //Log.d("pttt", gson.toJson(search_scholarship));
-                                getScholarships(search_scholarship);
+                                showResultFragment();
                             }
                             else {
                                 Toast.makeText(getApplicationContext(), "Please Fill The Form First", Toast.LENGTH_SHORT).show();
@@ -149,7 +150,7 @@ public class MainActivity extends AppCompatActivity implements Callback<List<Sch
                     }
             }
         });
-        bottomNav.setCount(1,"10");
+
         bottomNav.show(2,true);
 
 
@@ -182,15 +183,21 @@ public class MainActivity extends AppCompatActivity implements Callback<List<Sch
         fragmentTransaction.commit(); // save the changes
     }
 
+    private void showResultFragment() {
+        bottomNav.setCount(1, String.valueOf(scholarshipsResults.size()));
+        Bundle args = new Bundle();
+        results_fragment = new Results_Fragment();
+        args.putString(Constants.SCHOLARSHIPS, gson.toJson(scholarshipsResults));
+        results_fragment.setArguments(args);
+        loadFragment(results_fragment);
+    }
+
     @Override
     public void onResponse(Call<List<Scholarship>> call, Response<List<Scholarship>> response) {
         if (response.isSuccessful()) {
-            List<Scholarship> scholarships = response.body();
-            Bundle args = new Bundle();
-            results_fragment = new Results_Fragment();
-            args.putString(Constants.SCHOLARSHIPS, gson.toJson(scholarships));
-            results_fragment.setArguments(args);
-            loadFragment(results_fragment);
+            scholarshipsResults = response.body();
+            bottomNav.show(1, true);
+            //showResultFragment();
         } else {
             Log.e("pttt", "Response " + response.code() + " - " + response.errorBody().toString());
         }
