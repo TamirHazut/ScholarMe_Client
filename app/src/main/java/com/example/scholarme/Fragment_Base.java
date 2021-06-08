@@ -19,6 +19,10 @@ public class Fragment_Base extends Fragment {
 
     protected Search_Scholarship search_scholarship = new Search_Scholarship();
 
+     /**
+     * Gets resource File text.
+     * @return list of data
+     */
     protected List<String> readTextFile(int resourceFile) {
         List<String> data = new ArrayList<>();
         String string = "";
@@ -40,6 +44,10 @@ public class Fragment_Base extends Fragment {
         }
     }
 
+    /**
+     * Gets resource File and dropDown
+     * @return fits each data from resource File to it's dropDown
+     */
     protected void setFitDropDown(AutoCompleteTextView dropDown, int  resourceFile){
         dropDown.setAdapter(new ArrayAdapter<String>(getActivity().getApplicationContext(), R.layout.dropdown_menu_list_item, readTextFile(resourceFile)));
         dropDown.setOnItemClickListener(new AdapterView.OnItemClickListener() {
