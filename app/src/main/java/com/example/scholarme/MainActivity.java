@@ -46,17 +46,7 @@ public class MainActivity extends AppCompatActivity implements Callback<List<Sch
     private MeowBottomNavigation bottomNav;
     private List<Scholarship> scholarshipsResults;
 
-  //  private BottomNavigationView bottomNav;
 
-//    private Call_Back_SearchForm call_back_searchForm = new Call_Back_SearchForm() {
-//        @Override
-//        public void searchForm() {
-//            form_fragment = new Form_Fragment();
-//            form_fragment.setCall_back_searchForm(call_back_searchForm);
-//            fragment = form_fragment;
-//            loadFragment(fragment);
-//        }
-//    };
     private Call_Back_Results call_back_results = new Call_Back_Results() {
         @Override
         public void showResults() {
@@ -92,7 +82,6 @@ public class MainActivity extends AppCompatActivity implements Callback<List<Sch
 
         findviews();
         initviews();
-        //Glide.with(this).load("https://image.freepik.com/free-vector/abstract-low-polygonal-graduation-cap_127544-825.jpg").into(this.background_IMG);
 
     }
 
@@ -108,20 +97,19 @@ public class MainActivity extends AppCompatActivity implements Callback<List<Sch
         });
         loadFragment(form_fragment);
 
-        //add items
+        //add items to NavBar
         bottomNav.add(new MeowBottomNavigation.Model(1,R.drawable.ic_search));
         bottomNav.add(new MeowBottomNavigation.Model(2,R.drawable.ic_home));
         bottomNav.add(new MeowBottomNavigation.Model(3,R.drawable.ic_publish));
 
+        // fits navBar item to each fragment loaded
         bottomNav.setOnShowListener(new MeowBottomNavigation.ShowListener() {
             @Override
             public void onShowItem(MeowBottomNavigation.Model item) {
                 switch (item.getId()) {
                         case 1:
                             if(search_scholarship != null && !bottomNav.isShowing(1)) {
-// String institute, String degree, String location, String sectors, String study_year, String graduation_year, Gender gender, Contribution contribution
-                                //Search_Scholarship search_scholarship =new Search_Scholarship("1", "1", "1", "1", "1", "1", Gender.FEMALE, true);
-                                //Log.d("pttt", gson.toJson(search_scholarship));
+
                                 showResultFragment();
                             }
                             else {
@@ -130,7 +118,6 @@ public class MainActivity extends AppCompatActivity implements Callback<List<Sch
                             break;
 
                         case 2:
-                            Log.d("pttt","products");
                             form_fragment= new Form_Fragment();
                             form_fragment.setCall_back_searchForm(new Call_Back_SearchForm() {
                                 @Override
@@ -138,11 +125,9 @@ public class MainActivity extends AppCompatActivity implements Callback<List<Sch
                                     getScholarships(search_scholarship);
                                 }
                             });
-                            //fragment = form_fragment;
                             loadFragment(form_fragment);
                             break;
                         case 3:
-                            Log.d("pttt","cart");
                             publish_scolarship = new Publish_Scholarship_Fragment();
                             fragment = publish_scolarship;
                             loadFragment(fragment);
@@ -151,23 +136,20 @@ public class MainActivity extends AppCompatActivity implements Callback<List<Sch
             }
         });
 
+        
         bottomNav.show(2,true);
-
-
         bottomNav.setOnClickMenuListener(new MeowBottomNavigation.ClickListener() {
             @Override
             public void onClickItem(MeowBottomNavigation.Model item) {
                 Toast.makeText(getApplicationContext(),"You Clicked- "+item.getId(),Toast.LENGTH_SHORT).show();
             }
         });
-
         bottomNav.setOnReselectListener(new MeowBottomNavigation.ReselectListener() {
             @Override
             public void onReselectItem(MeowBottomNavigation.Model item) {
                 Toast.makeText(getApplicationContext(),"You Reselected- "+item.getId(),Toast.LENGTH_SHORT).show();
             }
         });
-        //bottomNav.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
     }
 
     private void findviews() {
@@ -183,6 +165,9 @@ public class MainActivity extends AppCompatActivity implements Callback<List<Sch
         fragmentTransaction.commit(); // save the changes
     }
 
+      /**
+     * Show results from server
+     */
     private void showResultFragment() {
         bottomNav.setCount(1, String.valueOf(scholarshipsResults.size()));
         Bundle args = new Bundle();
@@ -208,31 +193,12 @@ public class MainActivity extends AppCompatActivity implements Callback<List<Sch
         Log.e("pttt", "Failed: " + t.getMessage());
     }
 
+ 
     public void getScholarships(Search_Scholarship scholarship) {
         search_scholarship = scholarship;
         Call<List<Scholarship>> call = scholarshipsAPI.getScholarships(scholarship);
         call.enqueue(this);
 
-//        Bundle args = new Bundle();
-//        results_fragment = new Results_Fragment();
-//        args.putString(Constants.SCHOLARSHIPS, gson.toJson(getMock()));
-//        results_fragment.setArguments(args);
-//        loadFragment(results_fragment);
-    }
-
-//    public List<Scholarship> getMock() {
-//        List<Scholarship> scholarships = new ArrayList<>();
-//        // String id, String name, Date create_time, String description, List<String> links, Set<String> tags, double matchingPercentage
-//        scholarships.add(new Scholarship("1", "1", new Date(), "1", new ArrayList<>(), new HashSet<>(), 100));
-//        scholarships.add(new Scholarship("2", "2", new Date(), "2", new ArrayList<>(), new HashSet<>(), 90));
-//        scholarships.add(new Scholarship("3", "3", new Date(), "3", new ArrayList<>(), new HashSet<>(), 80));
-//        scholarships.add(new Scholarship("4", "4", new Date(), "4", new ArrayList<>(), new HashSet<>(), 70));
-//        scholarships.add(new Scholarship("5", "5", new Date(), "5", new ArrayList<>(), new HashSet<>(), 60));
-//        scholarships.add(new Scholarship("6", "6", new Date(), "6", new ArrayList<>(), new HashSet<>(), 50));
-//        scholarships.add(new Scholarship("7", "7", new Date(), "7", new ArrayList<>(), new HashSet<>(), 40));
-//        scholarships.add(new Scholarship("8", "8", new Date(), "8", new ArrayList<>(), new HashSet<>(), 100));
-//        return scholarships;
-//    }
 
     private OkHttpClient getUnsafeOkHttpClient() {
         try {
