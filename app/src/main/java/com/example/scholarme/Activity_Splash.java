@@ -11,6 +11,9 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+/**
+ * The first window when the app is being loaded
+ */
 public class Activity_Splash extends AppCompatActivity {
 
    private final int ANIMATION_DURATION = 2000;
@@ -23,10 +26,12 @@ public class Activity_Splash extends AppCompatActivity {
         setContentView(R.layout.activity__splash);
 
         findViews();
-        initViews();
         startAnimation(splash_LBL_name);
     }
 
+   /**
+ * The animation function which makes the text comes from down-up
+ */
     private void startAnimation(View view1) {
         DisplayMetrics displayMetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
@@ -53,8 +58,6 @@ public class Activity_Splash extends AppCompatActivity {
                 });
     }
 
-    private void initViews() {
-    }
 
     private void findViews() {
         splash_LBL_name = findViewById(R.id.splash_LBL_name);
