@@ -46,7 +46,7 @@ public class Fragment_Base extends Fragment {
 
     /**
      * Gets resource File and dropDown
-     * @return fits each data from resource File to it's dropDown
+     * fits each data from resource File to it's dropDown
      */
     protected void setFitDropDown(AutoCompleteTextView dropDown, int  resourceFile){
         dropDown.setAdapter(new ArrayAdapter<String>(getActivity().getApplicationContext(), R.layout.dropdown_menu_list_item, readTextFile(resourceFile)));
