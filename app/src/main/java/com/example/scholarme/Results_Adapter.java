@@ -13,9 +13,10 @@ import com.bumptech.glide.request.RequestOptions;
 
 import java.util.List;
 
-/**
- * Created by User on 1/17/2018.
- */
+   /**
+     * Results adapter - creates view out of the results
+     */
+    
 
 public class Results_Adapter extends RecyclerView.Adapter<Results_Adapter.ViewHolder> {
 
@@ -65,6 +66,10 @@ public class Results_Adapter extends RecyclerView.Adapter<Results_Adapter.ViewHo
         return items.size();
     }
 
+      /**
+     * Results RecyclerView parametes definision 
+     */
+    
     public class ViewHolder extends RecyclerView.ViewHolder{
 
         ImageView result_item_background;
