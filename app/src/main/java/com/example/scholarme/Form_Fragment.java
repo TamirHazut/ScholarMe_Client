@@ -37,8 +37,6 @@ public class Form_Fragment extends Fragment_Base {
     private AutoCompleteTextView  form_fragment_DDM_cities;
     private AutoCompleteTextView  form_fragment_DDM_sectors;
     private AutoCompleteTextView  form_fragment_DDM_study_year;
-
-
     private DatePickerDialog datePickerDialog;
     private EditText form_fragment_graduation_EDT;
     private RadioGroup form_fragment_gander_RGP;
@@ -47,21 +45,10 @@ public class Form_Fragment extends Fragment_Base {
     private Call_Back_SearchForm call_back_searchForm;
     private Results_Fragment results_fragment;
 
-    protected boolean isFull=false;
-
     public void setCall_back_searchForm(Call_Back_SearchForm _call_back_searchForm){
         this.call_back_searchForm = _call_back_searchForm;
     }
-    ///mkmk
-//    private Call_Back_Results call_back_results = new Call_Back_Results() {
-//        @Override
-//        public void showResults() {
-//            results_fragment = new Results_Fragment();
-//            results_fragment.setCall_back_showResults(call_back_results);
-//            fragment = results_fragment;
-//            loadFragment(fragment);
-//        }
-//    };
+
     public Form_Fragment() {
         // Required empty public constructor
     }
@@ -71,7 +58,6 @@ public class Form_Fragment extends Fragment_Base {
         View view= inflater.inflate(R.layout.fragment_form,container,false);
         findviews(view);
         initviews(view);
-        //Glide.with(this).load("https://image.freepik.com/free-vector/abstract-blue-background-science-technology-graphic-design_44392-180.jpg").into(this.form1_fragment_background_IMG);
         return view;
     }
 
@@ -91,8 +77,15 @@ public class Form_Fragment extends Fragment_Base {
 
     private void initviews(View view) {
 
+        
+     /**
+     * fits dropdowns by Resource files 
+     */
         setDRP(R.raw.sectors,R.raw.institutes,R.raw.cities,R.raw.degrees,R.raw.study_year);
 
+     /**
+     * Contribution - Weather the students wants to volunteer -YES or NO
+     */
         this.form_fragment_SWT.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked){
@@ -108,21 +101,27 @@ public class Form_Fragment extends Fragment_Base {
             }
         });
 
+     /**
+     * Gander 
+     */
         form_fragment_gander_RGP.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged (RadioGroup group,int checkedId){
                 Log.d("DDM", "id" + checkedId);
                 if (checkedId == R.id.form_fragment_female) {
-                    Log.d("DDM", "Institute: F");
+                    Log.d("DDM", "Gander: F");
                     search_scholarship.setGender(Gender.FEMALE);
                 } else if (checkedId == R.id.form_fragment_male) {
-                    Log.d("DDM", "Institute: M");
+                    Log.d("DDM", "Gander: M");
                     search_scholarship.setGender(Gender.MALE);
                 }
             }
         });
 
         form_fragment_graduation_EDT.setInputType(InputType.TYPE_NULL);
+     /**
+     * Date Picker Dialog- builds a date-  DD/MM/YYYY
+     */
         form_fragment_graduation_EDT.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -149,6 +148,7 @@ public class Form_Fragment extends Fragment_Base {
             }
         });
 
+    
         this.continue_BTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -156,7 +156,6 @@ public class Form_Fragment extends Fragment_Base {
                 if(call_back_searchForm!=null){
                     if(checkForm() == true){
                         Log.d("pttt",search_scholarship.toString());
-                        Toast.makeText(v.getContext(), "Product has been Added!!", Toast.LENGTH_SHORT).show();
                         call_back_searchForm.searchForm(search_scholarship);
                     }
                     else{
@@ -168,10 +167,12 @@ public class Form_Fragment extends Fragment_Base {
 
     }
 
-
+     /**
+     * @return if the form is files properly
+     *         
+     */
 
     private boolean checkForm() {
-        //this.form_fragment_DDM_cities.getText().toString().isEmpty()
         if(search_scholarship.getSectors()==null ||
                search_scholarship.getInstitute()==null ||
                 search_scholarship.getDegree()==null ||
@@ -183,10 +184,12 @@ public class Form_Fragment extends Fragment_Base {
         return true;
     }
 
+     /**
+     * Gets the Resource files of dropdowns options for disply
+     */
     public void setDRP(int sectorsResourceFile,int institutesResourceFile,int citiesResourceFile, int degreesResourceFile,int studyYearResourceFile){
 
         setFitDropDown(form_fragment_DDM_sectors,sectorsResourceFile);
-
         setFitDropDown(form_fragment_DDM_institute,institutesResourceFile);
         setFitDropDown(form_fragment_DDM_cities,citiesResourceFile);
         setFitDropDown(form_fragment_DDM_degree,degreesResourceFile);
@@ -194,6 +197,12 @@ public class Form_Fragment extends Fragment_Base {
 
 
     }
+    
+      /**
+     * Gets the date of graduation
+     * @return true- the date is future date
+     *         false- the
+     */
     private boolean checkDate(int dayOfMonth, int monthOfYear, int year, int day, int month, int yearC) {
         if(year > yearC)
             return true;
